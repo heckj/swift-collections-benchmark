@@ -23,7 +23,7 @@ let package = Package(
         .target(
             name: "Kalimba",
             dependencies: [
-                // .product(name: "Collections", package: "swift-collections"),
+                .product(name: "Collections", package: "swift-collections"),
             ]),
         .testTarget(
             name: "KalimbaTests",
