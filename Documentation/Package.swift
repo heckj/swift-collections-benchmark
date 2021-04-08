@@ -28,7 +28,8 @@ let package = Package(
         .target(
             name: "kalimba-benchmark",
             dependencies: [
-                .product(name: "CollectionsBenchmark", package: "swift-collections-benchmark"),
+                "Kalimba",
+                .product(name: "CollectionsBenchmark", package: "swift-collections-benchmark")
             ]
             //path: "Benchmarks/swift-collections-benchmark"
         ),
