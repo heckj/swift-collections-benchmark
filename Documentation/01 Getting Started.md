@@ -57,6 +57,7 @@ That's all we needed to write -- we now have a helpful benchmark utility that we
 [Swift Argument Parser]: https://github.com/apple/swift-argument-parser
 
 ### Running Benchmarks
+
 Here is how we can use this tool to run our benchmark, collecting data into a file called `results`. By default, the tool measures execution time for sizes between 1 and and 1,000,000.
 
 ```shellsession
@@ -81,6 +82,7 @@ If it takes too long to run the benchmarks, feel free to stop them at any point 
 Be sure to explore the `--help` output to get to know what you can control! (There are so many options...)
 
 ### Visualizing Results
+
 The generated `results` file is text file in a simple JSON format, containing all the data you collected. This is useful for machines, but unfortunately it's pretty hard for a human to analyze data in this form -- so we need to visualize it somehow. Luckily, there is a command for that:
 
 ```shellsession
@@ -185,7 +187,7 @@ The `results compare` command gets even more powerful once we have more than one
 
 ### Benchmark Libraries
 
-If you're anything like me, once you get the hang of writing benchmarks, it's difficult to stop. For example, the `Collections` package has several hundred (and counting!) benchmark definitions, each capturing a different aspect of data structure behavior. 
+If you're anything like me, once you get the hang of writing benchmarks, it's difficult to stop. For example, the `Collections` package has several hundred (and counting!) benchmark definitions, each capturing a different aspect of data structure behavior.
 
 With so many benchmarks, we need a way to organize them into a series of thematic charts that make sense -- trying to render them all on a single chart makes for interesting glitch art, but it isn't very practical:
 
@@ -230,7 +232,7 @@ For example, here is a snippet from [the small chart library][announcement-libra
 
 The `library run` and `library render` commands can be used to collect data and to render the library:
 
-```
+```shellsession
 $ swift-collections-benchmark library run results.json --library Library.json --max-size 16M --cycles 20
 $ swift-collections-benchmark library render results.json --library Library.json --max-time 10us --min-time 1ns --theme-file Theme.json --percentile 90 --output .
 ```
