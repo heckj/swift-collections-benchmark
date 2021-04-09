@@ -58,7 +58,7 @@ benchmark.addSimple(
 benchmark.main()
 ```
 
-The benchmark definition above has a title, an input type specification, and a closure to execute it. In this case, our `kalimbaOrdered` benchmark uses an array of integers as its input (populated by randomly shuffling integers in the range `0..<size`, where `size` varies between executions). On every run, it reorders its input into kalimba order, and feeds the result to the special `blackHole` function. This function simply discards its input -- but it does it in a way that prevents the Swift compiler from realizing that the result isn't actually used. (Otherwise, the compiler may helpfully eliminate the entire calculation, defeating the whole purpose of running the benchmark!)
+The benchmark definition above has a title, an input type specification, and a closure to execute it. In this case, our `kalimbaOrdered` benchmark uses an array of integers as its input (populated by randomly shuffling integers in the range `0..<size`, where `size` varies between executions). On every run, it reorders its input into kalimba order, and feeds the result to the special `blackHole` function. This function discards its input -- but it does it in a way that prevents the Swift compiler from realizing that the result isn't actually used. (Otherwise, the compiler may helpfully eliminate the entire calculation, defeating the whole purpose of running the benchmark!)
 
 That's all we needed to write -- we now have a helpful benchmark utility that we can run from the command line. It uses the [Swift Argument Parser] to provide a friendly interface, with lots of interesting commands and a rich set of options, complete with `--help` for each.
 
@@ -85,7 +85,7 @@ $
 
 The `--cycles` option specifies the number of times we want the tool to cycle through the sizes. (By default, the tool never stops -- if you decide you have enough data, just press Control-C to terminate it.) 
 
-If it takes too long to run the benchmarks, feel free to stop them at any point -- the results are regularly saved, so you won't lose progress. It is also fine to collect more data later by re-executing the same command -- by default, it will simply add data to the existing results, rather than overwriting them. (Although you can control this behavior with the `--mode` option.)
+If it takes too long to run the benchmarks, feel free to stop them at any point -- the results are regularly saved, so you won't lose progress. It is also fine to collect more data later by re-executing the same command -- by default, it adds data to the existing results, rather than overwriting them. (Although you can control this behavior with the `--mode` option.)
 
 Be sure to explore the `--help` output to get to know what you can control! (There are so many options...)
 
@@ -143,7 +143,7 @@ extension Sequence {
 }
 ```
 
-I can easily confirm that this will be faster by simply re-running the benchmarks. I'm careful to use a new output file, though -- I don't want the new results to get mixed in with the old:
+I can easily confirm that this will be faster by re-running the benchmarks. I'm careful to use a new output file, though -- I don't want the new results to get mixed in with the old:
 
 ```shellsession
 $ swift run -c release kalimba-benchmark run --cycles 3 results-deque
@@ -161,7 +161,7 @@ Finished in 4.12s
 
 Well this is already quite promising -- it ran in less than five seconds, while the original took more than a full minute!
 
-For a more detailed differential analysis, we can simply ask the tool to compare two benchmark results:
+For a more detailed differential analysis, we can ask the tool to compare two benchmark results:
 
 ```shellsession
 $ swift run -c release kalimba-benchmark results compare results results-deque
