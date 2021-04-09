@@ -30,7 +30,15 @@ This is where this package comes in -- it lets us easily create, run, and analyz
 
 ### Defining Benchmarks
 
-To add benchmarks, we can simply put our implementation in a new executable target, and type the following code into its `main.swift` file:
+The `CollectionsBenchmark` library makes it easy to add an executable target for running, collecting, visualizing, and comparing benchmarks from the command line.
+To create a benchmark CLI tool, create a main.swift file and within it:
+
+1. Import `CollectionsBenchmark`.
+2. Create a `Benchmark` instance with an appropriate title.
+3. Add a benchmark to this instance using the `addSimple` method to configure the benchmark with a closure to execute.
+4. Invoke `benchmark.main()` to use the library's CLI features.
+
+This is illustrated in the following example, included as [`main.swift`](./Example/Sources/kalimba-benchmark/main.swift) in the [`Documentation/Example` directory](./Example) of this project:
 
 ```swift
 import CollectionsBenchmark
@@ -98,7 +106,7 @@ Here is how the resulting graph looks with the results I've just collected:
 
 By default, the tool generates log-log charts showing the average processing time spent on each individual input item. These may look weird at first, but I find this format produces the most useful overview of the underlying data.
 
-The chart shows that the average time spent on each element initially starts high, then goes down until the input size reaches a certain size. This is pretty typical -- it just means that there is some sort of constant(ish) overhead (allocation costs, etc.) that is a significant component of the overall runtime at small sizes, but its cost gradually becomes insignificant as we have more elements to process. 
+The chart shows that the average time spent on each element initially starts high, then goes down until the input size reaches a certain size. This is pretty typical -- it just means that there is some sort of constant(ish) overhead (allocation costs, etc.) that is a significant component of the overall runtime at small sizes, but its cost gradually becomes insignificant as we have more elements to process.
 
 For input counts above 256 elements or so, our `kalimbaOrdered` curve looks like a straight(ish) line, roughly doubling in time every time we double the input size -- this slope indicates that the per-element execution time is linear, which means that the overall time to process all items is quadratic. So we've confirmed our original estimate.
 
